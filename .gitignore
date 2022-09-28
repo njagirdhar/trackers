@@ -4,9 +4,9 @@
 # Log file
 *.log
 
-# Gradle folders
+### Gradle ###
 .gradle
-build
+/build/
 .idea
 
 # Package Files #
@@ -17,3 +17,6 @@ build
 *.zip
 *.tar.gz
 *.rar
+
+
+!/gradle/wrapper/gradle-wrapper.jar
