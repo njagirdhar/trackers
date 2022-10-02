@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.Random;
 
@@ -66,7 +65,6 @@ public class AppUserService {
         log.error("Sending Mail to user with PIN");
     }
 
-    @Transactional
     public AppResponse resetPassword(ResetPassword resetPassword) {
         boolean userExists = appUserRepository.findByEmail(resetPassword.getEmail()).isPresent();
         if (!userExists) {
@@ -76,7 +74,7 @@ public class AppUserService {
         AppUser appUser = optionalAppUser.get();
         String encryptPassword = bCryptPasswordEncoder.encode(resetPassword.getNewPassword());
         appUser.setPassword(encryptPassword);
-        appUserRepository.resetPassword(resetPassword.getEmail(),resetPassword.getNewPassword());
+        appUserRepository.save(appUser);
         return new AppResponse("Password is updated Successfully");
     }
 }

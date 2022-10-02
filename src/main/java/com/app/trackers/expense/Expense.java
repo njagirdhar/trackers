@@ -5,28 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
-@Table(name = "EXPENSE_TBL")
+@Document(value = "EXPENSE_TBL")
 public class Expense {
 
     @Id
     private Long id;
-    @Column(name = "TITLE" , length = 25)
+    @Field(name = "TITLE" , order = 1)
     private String title;
-    @Column(name = "DESCRIPTION" , length = 75)
+    @Field(name = "DESCRIPTION" , order = 2)
     private String description;
-    @Column(name = "AMOUNT" , length = 10 , scale = 2)
+    @Field(name = "AMOUNT" , order = 3)
     private double amount;
-    @Column(name = "DATETIME" , length = 12)
+    @Field(name = "DATETIME", order = 4)
     private String dateTime;
 }

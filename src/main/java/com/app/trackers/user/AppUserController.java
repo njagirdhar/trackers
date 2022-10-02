@@ -33,7 +33,7 @@ public class AppUserController {
         return ResponseEntity.status(HttpStatus.OK).body(appUserService.forgotPassword(forgotPassword));
     }
 
-    @PostMapping(path = "/reset-password")
+    @PutMapping(path = "/reset-password")
     public ResponseEntity<AppResponse> resetPassword(@RequestBody ResetPassword resetPassword){
         return ResponseEntity.status(HttpStatus.OK).body(appUserService.resetPassword(resetPassword));
     }
